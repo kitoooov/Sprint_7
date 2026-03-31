@@ -3,6 +3,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .kotlin
+src/main/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
@@ -12,6 +13,7 @@ target/
 .idea/encodings.xml
 .idea/misc.xml
 .gitignore
+.idea/vcs.xml
 *.iws
 *.iml
 *.ipr
