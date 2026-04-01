@@ -37,7 +37,7 @@ public class CourierCreateTest extends BaseTest {
 
         createCourier(courier)
                 .then()
-                .statusCode(400) // Bad Request
+                .statusCode(400)
                 .body("message", equalTo("Недостаточно данных для создания учетной записи"));
     }
 

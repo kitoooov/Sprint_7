@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.equalTo;
 
 public class CourierLoginTest extends BaseTest {
 
@@ -39,7 +40,8 @@ public class CourierLoginTest extends BaseTest {
         CourierModel wrongPass = new CourierModel(courier.getLogin(), "wrong", courier.getFirstName());
         loginCourier(wrongPass)
                 .then()
-                .statusCode(404);
+                .statusCode(404)
+                .body("message", equalTo("Учетная запись не найдена"));
     }
 
     @Test
@@ -47,7 +49,8 @@ public class CourierLoginTest extends BaseTest {
         CourierModel noLogin = new CourierModel(null, courier.getPassword(), courier.getFirstName());
         loginCourier(noLogin)
                 .then()
-                .statusCode(400);
+                .statusCode(400)
+                .body("message", equalTo("Недостаточно данных для входа"));
     }
 
     @Test
@@ -55,7 +58,8 @@ public class CourierLoginTest extends BaseTest {
         CourierModel noPassword = new CourierModel(courier.getLogin(), null, courier.getFirstName());
         loginCourier(noPassword)
                 .then()
-                .statusCode(400);
+                .statusCode(400)
+                .body("message", equalTo("Недостаточно данных для входа"));
     }
 
     @Test
@@ -63,7 +67,8 @@ public class CourierLoginTest extends BaseTest {
         CourierModel wrongLogin = new CourierModel("wrongLogin", courier.getPassword(), courier.getFirstName());
         loginCourier(wrongLogin)
                 .then()
-                .statusCode(404);
+                .statusCode(404)
+                .body("message", equalTo("Учетная запись не найдена"));
     }
 
     @Step("Создать курьера с логином {courier.login}")
